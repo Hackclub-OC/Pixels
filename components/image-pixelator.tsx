@@ -74,7 +74,7 @@ export function ImagePixelator() {
 
     // Get image data
     const imageData = ctx.getImageData(0, 0, canvasSize, canvasSize)
-    const data = imageData.data
+    // const data = imageData.data
 
     // Create temporary canvas for pixelation
     const tempCanvas = document.createElement('canvas')
