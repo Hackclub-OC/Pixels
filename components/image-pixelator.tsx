@@ -2,10 +2,10 @@
 
 import { useCallback, useRef, useState, useEffect } from "react"
 import { useDropzone } from "react-dropzone"
-import { Plus, Download, RotateCcw, Eraser } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { PixelControls } from "./pixel-controls"
-import { Button } from "@/components/ui/button"
+// import { Button } from "@/components/ui/button"
 
 export function ImagePixelator() {
   const [image, setImage] = useState<string | null>(null)
