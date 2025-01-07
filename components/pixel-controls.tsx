@@ -35,16 +35,16 @@ export function PixelControls({
   onDownloadFileNameChange,
 }: PixelControlsProps) {
   return (
-    <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-4 p-4 bg-background/80 backdrop-blur rounded-lg">
+    <div className="flex flex-wrap items-center justify-between gap-4 p-4 bg-background dark:bg-black border dark:border-gray-600 rounded-lg shadow-md">
       <div className="flex items-center gap-4">
         <Select
           value={pixelSize.toString()}
           onValueChange={(value) => onPixelSizeChange(Number(value))}
         >
-          <SelectTrigger className="w-[100px]">
+          <SelectTrigger className="w-[100px] bg-background dark:bg-black dark:text-white">
             <SelectValue placeholder="Pixel size" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-background dark:bg-black dark:text-white">
             <SelectItem value="4">4px</SelectItem>
             <SelectItem value="8">8px</SelectItem>
             <SelectItem value="16">16px</SelectItem>
@@ -57,7 +57,7 @@ export function PixelControls({
             type="color"
             value={selectedColor}
             onChange={(e) => onColorChange(e.target.value)}
-            className="w-9 h-9 p-1 bg-background border rounded"
+            className="w-9 h-9 p-1 bg-background dark:bg-black border dark:border-gray-600 rounded"
           />
         </div>
       </div>
@@ -66,16 +66,16 @@ export function PixelControls({
           type="text"
           value={downloadFileName}
           onChange={(e) => onDownloadFileNameChange(e.target.value)}
-          className="w-40"
+          className="w-40 bg-background dark:bg-black dark:text-white"
           placeholder="File name"
         />
-        <Button variant="outline" size="icon" onClick={onClear}>
+        <Button variant="outline" size="icon" onClick={onClear} className="bg-background dark:bg-black dark:text-white dark:hover:bg-gray-600">
           <Eraser className="h-4 w-4" />
         </Button>
-        <Button variant="outline" size="icon" onClick={onReset}>
+        <Button variant="outline" size="icon" onClick={onReset} className="bg-background dark:bg-black dark:text-white dark:hover:bg-gray-600">
           <RotateCcw className="h-4 w-4" />
         </Button>
-        <Button variant="outline" size="icon" onClick={onExport}>
+        <Button variant="outline" size="icon" onClick={onExport} className="bg-background dark:bg-black dark:text-white dark:hover:bg-gray-600">
           <Download className="h-4 w-4" />
         </Button>
       </div>

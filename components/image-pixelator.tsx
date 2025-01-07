@@ -5,9 +5,12 @@ import { useDropzone } from "react-dropzone"
 import { Plus } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { PixelControls } from "./pixel-controls"
-// import { Button } from "@/components/ui/button"
 
-export function ImagePixelator() {
+interface ImagePixelatorProps {
+  onEditorModeChange: (isEditorMode: boolean) => void
+}
+
+export function ImagePixelator({ onEditorModeChange }: ImagePixelatorProps) {
   const [image, setImage] = useState<string | null>(null)
   const [pixelSize, setPixelSize] = useState(8)
   const [selectedColor, setSelectedColor] = useState("#ff69b4") // Pink default
@@ -24,10 +27,11 @@ export function ImagePixelator() {
       img.onload = () => {
         setOriginalImage(img)
         setDownloadFileName(file.name.split('.')[0] + "-pixelated")
+        onEditorModeChange(true)
       }
       img.src = URL.createObjectURL(file)
     }
-  }, [])
+  }, [onEditorModeChange])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -74,7 +78,7 @@ export function ImagePixelator() {
 
     // Get image data
     const imageData = ctx.getImageData(0, 0, canvasSize, canvasSize)
-    // const data = imageData.data
+    const data = imageData.data
 
     // Create temporary canvas for pixelation
     const tempCanvas = document.createElement('canvas')
@@ -145,11 +149,11 @@ export function ImagePixelator() {
 
   const resetToBlankState = useCallback(() => {
     setOriginalImage(null)
-    setImage(null)
     setPixelSize(8)
     setSelectedColor("#ff69b4")
     setDownloadFileName("pixelated-image")
-  }, [])
+    onEditorModeChange(false)
+  }, [onEditorModeChange])
 
   if (!originalImage) {
     return (
@@ -173,7 +177,7 @@ export function ImagePixelator() {
 
   return (
     <div className="w-full max-w-2xl">
-      <div className="relative">
+      <div className="relative mb-8">
         <canvas
           ref={canvasRef}
           onMouseDown={() => setIsMousePressed(true)}
@@ -185,18 +189,18 @@ export function ImagePixelator() {
           onClick={handleCanvasInteraction}
           className="w-full rounded-lg cursor-crosshair"
         />
-        <PixelControls
-          pixelSize={pixelSize}
-          onPixelSizeChange={setPixelSize}
-          selectedColor={selectedColor}
-          onColorChange={setSelectedColor}
-          onExport={exportImage}
-          onClear={clearCanvas}
-          onReset={resetToBlankState}
-          downloadFileName={downloadFileName}
-          onDownloadFileNameChange={setDownloadFileName}
-        />
       </div>
+      <PixelControls
+        pixelSize={pixelSize}
+        onPixelSizeChange={setPixelSize}
+        selectedColor={selectedColor}
+        onColorChange={setSelectedColor}
+        onExport={exportImage}
+        onClear={clearCanvas}
+        onReset={resetToBlankState}
+        downloadFileName={downloadFileName}
+        onDownloadFileNameChange={setDownloadFileName}
+      />
     </div>
   )
 }
