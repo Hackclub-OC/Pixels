@@ -35,7 +35,7 @@ export function PixelControls({
   onDownloadFileNameChange,
 }: PixelControlsProps) {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 p-4 bg-background dark:bg-black border dark:border-gray-600 rounded-lg shadow-md">
+    <div className="flex flex-wrap items-center justify-between gap-4 p-4 bg-background dark:bg-black border dark:border-gray-700 rounded-lg shadow-md">
       <div className="flex items-center gap-4">
         <Select
           value={pixelSize.toString()}
@@ -69,13 +69,13 @@ export function PixelControls({
           className="w-40 bg-background dark:bg-black dark:text-white"
           placeholder="File name"
         />
-        <Button variant="outline" size="icon" onClick={onClear} className="bg-background dark:bg-black dark:text-white dark:hover:bg-gray-600">
+        <Button variant="outline" size="icon" onClick={onClear} className="bg-background dark:bg-black dark:text-white dark:hover:bg-neutral-900">
           <Eraser className="h-4 w-4" />
         </Button>
-        <Button variant="outline" size="icon" onClick={onReset} className="bg-background dark:bg-black dark:text-white dark:hover:bg-gray-600">
+        <Button variant="outline" size="icon" onClick={onReset} className="bg-background dark:bg-black dark:text-white dark:hover:bg-neutral-900">
           <RotateCcw className="h-4 w-4" />
         </Button>
-        <Button variant="outline" size="icon" onClick={onExport} className="bg-background dark:bg-black dark:text-white dark:hover:bg-gray-600">
+        <Button variant="outline" size="icon" onClick={onExport} className="bg-background dark:bg-black dark:text-white dark:hover:bg-neutral-900">
           <Download className="h-4 w-4" />
         </Button>
       </div>

@@ -5,6 +5,7 @@ import { useDropzone } from "react-dropzone"
 import { Plus } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { PixelControls } from "./pixel-controls"
+import { CardContainer, CardBody, CardItem } from "./3d-card"
 
 interface ImagePixelatorProps {
   onEditorModeChange: (isEditorMode: boolean) => void
@@ -149,6 +150,7 @@ export function ImagePixelator({ onEditorModeChange }: ImagePixelatorProps) {
 
   const resetToBlankState = useCallback(() => {
     setOriginalImage(null)
+    setImage(null)
     setPixelSize(8)
     setSelectedColor("#ff69b4")
     setDownloadFileName("pixelated-image")
@@ -160,7 +162,7 @@ export function ImagePixelator({ onEditorModeChange }: ImagePixelatorProps) {
       <div
         {...getRootProps()}
         className={cn(
-          "w-full max-w-2xl aspect-video border-2 border-dashed rounded-lg flex flex-col items-center justify-center cursor-pointer transition-colors",
+          "w-full max-w-xl aspect-square  rounded-lg flex flex-col items-center justify-center cursor-pointer transition-colors",
           isDragActive ? "border-primary" : "border-muted-foreground"
         )}
       >
@@ -176,20 +178,26 @@ export function ImagePixelator({ onEditorModeChange }: ImagePixelatorProps) {
   }
 
   return (
-    <div className="w-full max-w-2xl">
-      <div className="relative mb-8">
-        <canvas
-          ref={canvasRef}
-          onMouseDown={() => setIsMousePressed(true)}
-          onMouseUp={() => setIsMousePressed(false)}
-          onMouseLeave={() => setIsMousePressed(false)}
-          onMouseMove={(e) => {
-            if (isMousePressed) handleCanvasInteraction(e)
-          }}
-          onClick={handleCanvasInteraction}
-          className="w-full rounded-lg cursor-crosshair"
-        />
-      </div>
+    <div className="flex flex-col justify-center items-center min-h-screen max-h-[110vh] py-4">
+      {originalImage && (
+        <CardContainer className="mb-4">
+          <CardBody className="w-full aspect-square max-w-xl">
+            <CardItem translateZ={50}>
+              <canvas
+                ref={canvasRef}
+                onMouseDown={() => setIsMousePressed(true)}
+                onMouseUp={() => setIsMousePressed(false)}
+                onMouseLeave={() => setIsMousePressed(false)}
+                onMouseMove={(e) => {
+                  if (isMousePressed) handleCanvasInteraction(e)
+                }}
+                onClick={handleCanvasInteraction}
+                className="w-full h-full rounded-lg cursor-crosshair"
+              />
+            </CardItem>
+          </CardBody>
+        </CardContainer>
+      )}
       <PixelControls
         pixelSize={pixelSize}
         onPixelSizeChange={setPixelSize}

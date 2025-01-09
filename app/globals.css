@@ -36,7 +36,7 @@
   }
  
   .dark {
-    --background: 0 0% 0%;
+    --background: 0 0% 7%;
     --foreground: 0 0% 100%;
  
     --card: 0 0% 3.9%;
@@ -73,5 +73,15 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.dark .card-3d {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-color: rgba(75, 85, 99, 0.5);
+}
+
+.dark .card-3d:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-color: rgba(75, 85, 99, 0.8);
 }
 
